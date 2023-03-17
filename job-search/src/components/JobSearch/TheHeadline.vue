@@ -5,7 +5,7 @@
       <br />
       for everyone
     </h1>
-    <h2 class="text-3xl font-light">Find your next job ad Dima's Corp.</h2>
+    <h2 class="text-3xl font-light">Find your next job at Dima's Corp.</h2>
   </section>
 </template>
 
