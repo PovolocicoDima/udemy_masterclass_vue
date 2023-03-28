@@ -6,12 +6,14 @@ import MainNav from "@/components/Navigation/MainNav.vue";
 
 describe("MainNav", () => {
   const renderMainNav = () => {
+    const $route = {
+      name: "Home",
+    };
+
     render(MainNav, {
       global: {
         mocks: {
-          $route: {
-            name: "Home",
-          },
+          $route,
         },
         stubs: {
           FontAwesomeIcon: true,
@@ -23,7 +25,7 @@ describe("MainNav", () => {
 
   it("displays company name", () => {
     renderMainNav();
-    const companyName = screen.getByText("Dima's careers");
+    const companyName = screen.getByText("Bobo Careers");
     expect(companyName).toBeInTheDocument();
   });
 

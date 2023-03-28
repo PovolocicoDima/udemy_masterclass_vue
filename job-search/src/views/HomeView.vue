@@ -7,8 +7,6 @@ import TheHero from "@/components/JobSearch/TheHero.vue";
 
 export default {
   name: "HomeView",
-  components: {
-    TheHero,
-  },
+  components: { TheHero },
 };
 </script>

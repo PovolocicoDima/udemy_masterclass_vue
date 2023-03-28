@@ -2,9 +2,9 @@
   <li class="mb-7">
     <router-link
       :to="jobPageLink"
-      class="rouded mx-auto block border border-solid border-brand-gray-2 bg-white hover:shadow-gray"
+      class="mx-auto block rounded border border-solid border-brand-gray-2 bg-white hover:shadow-gray"
     >
-      <div class="mx-8 border-b border-solid border-brand-gray-2 pb-2">
+      <div class="mx-8 border-b border-solid border-brand-gray-2 pt-5 pb-2">
         <h2 class="mb-2 text-2xl">
           {{ job.title }}
         </h2>
@@ -21,7 +21,7 @@
                 :key="location"
                 class="mr-5 inline-block"
               >
-                {{ location }}
+                <span>{{ location }}</span>
               </li>
             </ul>
           </div>
@@ -30,7 +30,7 @@
 
       <div class="px-8 py-4">
         <div>
-          <h3 class="mt-1 mb-2">Qualifications</h3>
+          <h3 class="mt-1 mb-2">Qualifications:</h3>
           <div>
             <ul class="list-disc pl-8">
               <li

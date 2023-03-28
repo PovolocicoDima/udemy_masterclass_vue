@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/vue";
 import { nextTick } from "vue";
+import { render, screen } from "@testing-library/vue";
+
 import TheHeadline from "@/components/JobSearch/TheHeadline.vue";
 
 describe("TheHeadline", () => {
@@ -17,14 +18,15 @@ describe("TheHeadline", () => {
     const actionPhrase = screen.getByRole("heading", {
       name: /build for everyone/i,
     });
-
     expect(actionPhrase).toBeInTheDocument();
   });
 
-  it("change action verb at a consistent interval", () => {
+  it("changes action verb at a consistent interval", () => {
     const mock = vi.fn();
     vi.stubGlobal("setInterval", mock);
+
     render(TheHeadline);
+
     expect(mock).toHaveBeenCalled();
   });
 
@@ -34,19 +36,20 @@ describe("TheHeadline", () => {
 
     await nextTick();
     const actionPhrase = screen.getByRole("heading", {
-      name: /design for everyone/i,
+      name: /create for everyone/i,
     });
 
     expect(actionPhrase).toBeInTheDocument();
   });
 
-  it("clears interval when component is unmounted", () => {
-    const mockClearInterval = vi.fn();
-    vi.stubGlobal("clearInterval", mockClearInterval);
+  it("removes interval when component disappears", () => {
+    const clearInterval = vi.fn();
+    vi.stubGlobal("clearInterval", clearInterval);
 
     const { unmount } = render(TheHeadline);
     unmount();
-    expect(mockClearInterval).toHaveBeenCalled();
+
+    expect(clearInterval).toHaveBeenCalled();
     vi.unstubAllGlobals();
   });
 });

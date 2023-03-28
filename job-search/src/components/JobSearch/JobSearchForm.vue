@@ -13,8 +13,9 @@
 
       <span
         class="flex h-full items-center border-l border-r border-brand-gray-3 bg-brand-gray-2 px-3"
-        >in</span
       >
+        in
+      </span>
 
       <div class="relative flex h-full flex-1 items-center pl-3">
         <label for="location" class="absolute left-0 -top-10">Where?</label>
@@ -36,10 +37,7 @@ import TextInput from "@/components/Shared/TextInput.vue";
 
 export default {
   name: "JobSearchForm",
-  components: {
-    ActionButton,
-    TextInput,
-  },
+  components: { ActionButton, TextInput },
   data() {
     return {
       role: "",
@@ -47,19 +45,10 @@ export default {
     };
   },
   methods: {
-    updateRole(payload) {
-      this.role = payload;
-    },
-    updateLocation(payload) {
-      this.location = payload;
-    },
     searchForJobs() {
       this.$router.push({
         name: "JobResults",
-        query: {
-          role: this.role,
-          location: this.location,
-        },
+        query: { role: this.role, location: this.location },
       });
     },
   },

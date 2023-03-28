@@ -1,4 +1,4 @@
-import nextElementList from "@/utils/nextElementList";
+import nextElementList from "@/utils/nextElementInList.js";
 
 describe("nextElementList", () => {
   it("returns the next element in a list", () => {

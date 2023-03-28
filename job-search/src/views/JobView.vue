@@ -1,12 +1,12 @@
 <template>
-  <div>Job page</div>
+  <div>Job Page for job {{ currentJobId }}</div>
 </template>
 
 <script>
 export default {
   name: "JobView",
   computed: {
-    jobId() {
+    currentJobId() {
       return this.$route.params.id;
     },
   },

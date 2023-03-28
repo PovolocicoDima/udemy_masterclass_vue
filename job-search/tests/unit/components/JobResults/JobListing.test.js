@@ -1,21 +1,22 @@
-import { screen, render } from "@testing-library/vue";
-import JobListing from "@/components/JobResults/JobListing.vue";
+import { render, screen } from "@testing-library/vue";
 import { RouterLinkStub } from "@vue/test-utils";
 
-describe("JobListing.vue", () => {
-  const createJob = (jobProps = {}) => ({
-    title: "Software Engineer",
-    organization: "Google",
-    locations: ["Orlando", "Remote"],
-    minimumQualifications: ["coding", "jogging"],
+import JobListing from "@/components/JobResults/JobListing.vue";
+
+describe("JobListing", () => {
+  const createJobProps = (jobProps = {}) => ({
+    title: "Vue Developer",
+    organization: "AirBnB",
+    locations: ["New York"],
+    minimumQualifications: ["Code"],
     ...jobProps,
   });
 
-  const rendersJobListing = (jobProps) => {
+  const renderJobListing = (jobProps) => {
     render(JobListing, {
       global: {
         stubs: {
-          RouterLink: RouterLinkStub,
+          "router-link": RouterLinkStub,
         },
       },
       props: {
@@ -26,29 +27,33 @@ describe("JobListing.vue", () => {
     });
   };
 
-  it("should render job title", () => {
-    const jobProps = createJob({ title: "Vue developer" });
-    rendersJobListing(jobProps);
-    expect(screen.getByText("Vue developer")).toBeInTheDocument();
+  it("renders job title", () => {
+    const jobProps = createJobProps({ title: "Vue Programmer" });
+    renderJobListing(jobProps);
+    expect(screen.getByText("Vue Programmer")).toBeInTheDocument();
   });
 
-  it("should render job organization", () => {
-    const jobProps = createJob({ organization: "Microsoft" });
-    rendersJobListing(jobProps);
-    expect(screen.getByText("Microsoft")).toBeInTheDocument();
+  it("renders job organization", () => {
+    const jobProps = createJobProps({ organization: "Samsung" });
+    renderJobListing(jobProps);
+    expect(screen.getByText("Samsung")).toBeInTheDocument();
   });
 
   it("renders job locations", () => {
-    const jobProps = createJob({ locations: ["Remote", "New York"] });
-    rendersJobListing(jobProps);
-    expect(screen.getByText("Remote")).toBeInTheDocument();
-    expect(screen.getByText("New York")).toBeInTheDocument();
+    const jobProps = createJobProps({
+      locations: ["Orlando", "Jacksonville"],
+    });
+    renderJobListing(jobProps);
+    expect(screen.getByText("Orlando")).toBeInTheDocument();
+    expect(screen.getByText("Jacksonville")).toBeInTheDocument();
   });
 
   it("renders job qualifications", () => {
-    const jobProps = createJob({ minimumQualifications: ["code", "develop"] });
-    rendersJobListing(jobProps);
-    expect(screen.getByText("code")).toBeInTheDocument();
-    expect(screen.getByText("develop")).toBeInTheDocument();
+    const jobProps = createJobProps({
+      minimumQualifications: ["Code", "Develop"],
+    });
+    renderJobListing(jobProps);
+    expect(screen.getByText("Code")).toBeInTheDocument();
+    expect(screen.getByText("Develop")).toBeInTheDocument();
   });
 });

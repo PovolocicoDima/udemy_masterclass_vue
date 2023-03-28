@@ -1,10 +1,11 @@
-import { screen, render } from "@testing-library/vue";
+import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
+
 import JobSearchForm from "@/components/JobSearch/JobSearchForm.vue";
 
-describe("JobSearchForm.vue", () => {
+describe("JobSearchForm", () => {
   describe("when user submits form", () => {
-    it("directs user to job results page with search query", async () => {
+    it("directs user to job results page with user's search parameters", async () => {
       const push = vi.fn();
       const $router = { push };
 
@@ -19,19 +20,24 @@ describe("JobSearchForm.vue", () => {
         },
       });
 
-      const roleInput = screen.getByRole("textbox", { name: /role/i });
-      await userEvent.type(roleInput, "Software Engineer");
-      const roleLocation = screen.getByRole("textbox", { name: /Where?/i });
-      await userEvent.type(roleLocation, "London");
-      const submitButton = screen.getByRole("button", { name: /search/i });
+      const roleInput = screen.getByRole("textbox", {
+        name: /role/i,
+      });
+      await userEvent.type(roleInput, "Vue Developer");
+
+      const locationInput = screen.getByRole("textbox", {
+        name: /where?/i,
+      });
+      await userEvent.type(locationInput, "Dallas");
+
+      const submitButton = screen.getByRole("button", {
+        name: /search/i,
+      });
       await userEvent.click(submitButton);
 
-      expect($router.push).toHaveBeenCalledWith({
+      expect(push).toHaveBeenCalledWith({
         name: "JobResults",
-        query: {
-          role: "Software Engineer",
-          location: "London",
-        },
+        query: { role: "Vue Developer", location: "Dallas" },
       });
     });
   });
