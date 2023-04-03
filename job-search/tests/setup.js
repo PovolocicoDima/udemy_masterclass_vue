@@ -5,5 +5,5 @@ import { expect, afterEach } from "vitest";
 expect.extend(matchers);
 
 afterEach(() => {
-  cleanup();
+    cleanup();
 });
