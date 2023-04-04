@@ -6,34 +6,34 @@ import JobView from "@/views/JobView.vue";
 import TeamsView from "@/views/TeamsView.vue";
 
 const routes = [
-    {
-        path: "/",
-        name: "Home",
-        component: HomeView,
-    },
-    {
-        path: "/jobs/results",
-        name: "JobResults",
-        component: JobResultsView,
-    },
-    {
-        path: "/jobs/results/:id",
-        name: "JobListing",
-        component: JobView,
-    },
-    {
-        path: "/teams",
-        name: "Teams",
-        component: TeamsView,
-    },
+  {
+    path: "/",
+    name: "Home",
+    component: HomeView,
+  },
+  {
+    path: "/jobs/results",
+    name: "JobResults",
+    component: JobResultsView,
+  },
+  {
+    path: "/jobs/results/:id",
+    name: "JobListing",
+    component: JobView,
+  },
+  {
+    path: "/teams",
+    name: "Teams",
+    component: TeamsView,
+  },
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
-    routes,
-    scrollBehavior() {
-        return { top: 0, left: 0, behavior: "smooth" };
-    },
+  history: createWebHashHistory(),
+  routes,
+  scrollBehavior() {
+    return { top: 0, left: 0, behavior: "smooth" };
+  },
 });
 
 export default router;
