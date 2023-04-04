@@ -5,7 +5,7 @@ import SpotLight from "@/components/JobSearch/SpotLight.vue";
 vi.mock("axios");
 
 describe("SpotLight.vue", () => {
-  it("provides image to parent component", async () => {
+  const mockSpotlightsResponse = (spotlight = {}) => {
     axios.get.mockResolvedValue({
       data: [
         {
@@ -13,9 +13,15 @@ describe("SpotLight.vue", () => {
           title: "some_title",
           description: "some_description",
           img: "some_image.jpg",
+          ...spotlight,
         },
       ],
     });
+  };
+
+  it("provides image to parent component", async () => {
+    const spotlight = { img: "another_image.jpg" };
+    mockSpotlightsResponse(spotlight);
 
     render(SpotLight, {
       slots: {
@@ -25,21 +31,13 @@ describe("SpotLight.vue", () => {
       },
     });
 
-    const text = await screen.findByText("some_image.jpg");
+    const text = await screen.findByText("another_image.jpg");
     expect(text).toBeInTheDocument();
   });
 
   it("provides title to parent component", async () => {
-    axios.get.mockResolvedValue({
-      data: [
-        {
-          id: 1,
-          title: "some_title",
-          description: "some_description",
-          img: "some_image.jpg",
-        },
-      ],
-    });
+    const spotlight = { title: "another_title" };
+    mockSpotlightsResponse(spotlight);
 
     render(SpotLight, {
       slots: {
@@ -49,21 +47,13 @@ describe("SpotLight.vue", () => {
       },
     });
 
-    const text = await screen.findByText("some_title");
+    const text = await screen.findByText("another_title");
     expect(text).toBeInTheDocument();
   });
 
   it("provides description to parent component", async () => {
-    axios.get.mockResolvedValue({
-      data: [
-        {
-          id: 1,
-          title: "some_title",
-          description: "some_description",
-          img: "some_image.jpg",
-        },
-      ],
-    });
+    const spotlight = { description: "another_description" };
+    mockSpotlightsResponse(spotlight);
 
     render(SpotLight, {
       slots: {
@@ -73,7 +63,7 @@ describe("SpotLight.vue", () => {
       },
     });
 
-    const text = await screen.findByText("some_description");
+    const text = await screen.findByText("another_description");
     expect(text).toBeInTheDocument();
   });
 });
