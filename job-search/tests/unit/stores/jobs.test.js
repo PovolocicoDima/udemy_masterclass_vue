@@ -70,6 +70,20 @@ describe("getters", () => {
       ]);
     });
 
+    describe("UNIQUE_JOB_TYPES", () => {
+      it("finds unique job types from list of jobs", () => {
+        const store = useJobsStore();
+        store.jobs = [
+          { jobType: "Full Time" },
+          { jobType: "Part Time" },
+          { jobType: "Full Time" },
+        ];
+
+        const result = store.UNIQUE_JOB_TYPES;
+        expect(result).toEqual(new Set(["Full Time", "Part Time"]));
+      });
+    });
+
     describe("when the user has not selected any organizations", () => {
       it("returns all jobs", () => {
         const jobsStore = useJobsStore();
@@ -89,6 +103,47 @@ describe("getters", () => {
           { organization: "Facebook" },
           { organization: "Microsoft" },
           { organization: "Amazon" },
+        ]);
+      });
+    });
+  });
+
+  describe("FILTERED_JOBS_BY_JOB_TYPES", () => {
+    it("filters jobs by selected job types", () => {
+      const jobsStore = useJobsStore();
+      jobsStore.jobs = [
+        { jobType: "Full Time" },
+        { jobType: "Part Time" },
+        { jobType: "Full Time" },
+        { jobType: "Contract" },
+      ];
+      const userStore = useUserStore();
+      userStore.selectedJobTypes = ["Full Time", "Contract"];
+      const result = jobsStore.FILTERED_JOBS_BY_JOB_TYPES;
+      expect(result).toEqual([
+        { jobType: "Full Time" },
+        { jobType: "Full Time" },
+        { jobType: "Contract" },
+      ]);
+    });
+
+    describe("when the user has not selected any job types", () => {
+      it("returns all jobs", () => {
+        const jobsStore = useJobsStore();
+        jobsStore.jobs = [
+          { jobType: "Full Time" },
+          { jobType: "Part Time" },
+          { jobType: "Full Time" },
+          { jobType: "Contract" },
+        ];
+        const userStore = useUserStore();
+        userStore.selectedJobTypes = [];
+        const result = jobsStore.FILTERED_JOBS_BY_JOB_TYPES;
+        expect(result).toEqual([
+          { jobType: "Full Time" },
+          { jobType: "Part Time" },
+          { jobType: "Full Time" },
+          { jobType: "Contract" },
         ]);
       });
     });

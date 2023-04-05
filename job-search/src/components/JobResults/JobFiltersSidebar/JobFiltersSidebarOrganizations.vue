@@ -5,7 +5,7 @@
         <ul
           v-for="organization in UNIQ_ORGANIZATIONS"
           :key="organization"
-          class="flex flex-row flex-wrap"
+          class="flex flex-col flex-wrap"
         >
           <li class="h-8">
             <input
