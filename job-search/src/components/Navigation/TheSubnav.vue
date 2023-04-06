@@ -26,3 +26,12 @@ export default {
   },
 };
 </script>
+
+<!-- <script setup>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { mapState } from "pinia";
+import { useJobsStore, FILTERED_JOBS } from "@/stores/jobs";
+
+
+</script> -->
