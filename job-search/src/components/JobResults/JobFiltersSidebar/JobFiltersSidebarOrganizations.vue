@@ -1,3 +1,23 @@
+<script setup>
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useJobsStore } from "@/stores/jobs";
+import { useUserStore } from "@/stores/user";
+import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
+
+const router = useRouter();
+const jobsStore = useJobsStore();
+const userStore = useUserStore();
+const selectedOrganizations = ref([]);
+const UNIQ_ORGANIZATIONS = computed(() => jobsStore.UNIQ_ORGANIZATIONS);
+const selectOrganization = () => {
+  userStore.ADD_SELECTED_ORGANIZATIONS(selectedOrganizations.value);
+  router.push({
+    name: "JobResults",
+  });
+};
+</script>
+
 <template>
   <collapsible-accordion header="Organizations">
     <div class="mt-5">
@@ -23,28 +43,3 @@
     </div>
   </collapsible-accordion>
 </template>
-
-<script>
-import { mapState, mapActions } from "pinia";
-import { useJobsStore, UNIQ_ORGANIZATIONS } from "@/stores/jobs";
-import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
-import { useUserStore, ADD_SELECTED_ORGANIZATIONS } from "@/stores/user";
-
-export default {
-  name: "JobFiltersSidebarOrganizations",
-  components: { CollapsibleAccordion },
-  data: () => ({
-    selectedOrganizations: [],
-  }),
-  computed: {
-    ...mapState(useJobsStore, [UNIQ_ORGANIZATIONS]),
-  },
-  methods: {
-    ...mapActions(useUserStore, [ADD_SELECTED_ORGANIZATIONS]),
-    selectOrganization() {
-      this.ADD_SELECTED_ORGANIZATIONS(this.selectedOrganizations);
-      this.$router.push({ name: "JobResults" });
-    },
-  },
-};
-</script>

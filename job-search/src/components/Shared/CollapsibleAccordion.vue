@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps } from "vue";
+import { ref, computed } from "vue";
 defineProps({ header: { type: String, required: true } });
 
 const isOpen = ref(false);
