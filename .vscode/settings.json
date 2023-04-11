@@ -3,5 +3,6 @@
   "editor.formatOnSave": true,
   "css.lint.unknownAtRules": "ignore",
   "prettier.singleQuote": true,
-  "prettier.trailingComma": "all"
+  "prettier.trailingComma": "all",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

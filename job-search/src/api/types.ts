@@ -10,3 +10,10 @@ export interface Job {
   preferredQualifications: string[];
   dateAdded: string;
 }
+
+export interface Spotlight {
+  id: number;
+  img: string;
+  title: string;
+  description: string;
+}

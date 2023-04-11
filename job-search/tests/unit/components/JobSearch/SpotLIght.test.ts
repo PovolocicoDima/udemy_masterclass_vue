@@ -1,12 +1,15 @@
 import { screen, render } from "@testing-library/vue";
 import axios from "axios";
+import type { Mock } from "vitest";
 import SpotLight from "@/components/JobSearch/SpotLight.vue";
 
 vi.mock("axios");
 
+const axiosGetMock = axios.get as Mock;
+
 describe("SpotLight.vue", () => {
   const mockSpotlightsResponse = (spotlight = {}) => {
-    axios.get.mockResolvedValue({
+    axiosGetMock.mockResolvedValue({
       data: [
         {
           id: 1,
@@ -27,7 +30,7 @@ describe("SpotLight.vue", () => {
       slots: {
         default: `<template #default="slotProps">
                     <h1>{{ slotProps.img }}</h1>
-                </template>`,
+                  </template>`,
       },
     });
 
@@ -43,7 +46,7 @@ describe("SpotLight.vue", () => {
       slots: {
         default: `<template #default="slotProps">
                     <h1>{{ slotProps.title }}</h1>
-                </template>`,
+                  </template>`,
       },
     });
 
@@ -59,7 +62,7 @@ describe("SpotLight.vue", () => {
       slots: {
         default: `<template #default="slotProps">
                     <h1>{{ slotProps.description }}</h1>
-                </template>`,
+                  </template>`,
       },
     });
 

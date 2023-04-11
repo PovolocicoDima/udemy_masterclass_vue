@@ -1,3 +1,24 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import ActionButton from "@/components/Shared/ActionButton.vue";
+import TextInput from "@/components/Shared/TextInput.vue";
+
+const router = useRouter();
+const role = ref("");
+const location = ref("");
+
+const searchForJobs = () => {
+  router.push({
+    name: "JobResults",
+    query: {
+      role: role.value,
+      location: location.value,
+    },
+  });
+};
+</script>
+
 <template>
   <form
     class="flex h-12 w-full items-center rounded-3xl border border-solid border-brand-gray-3"
@@ -30,24 +51,3 @@
     <action-button text="Search" type="secondary" class="rounded-r-3xl" />
   </form>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import ActionButton from "@/components/Shared/ActionButton.vue";
-import TextInput from "@/components/Shared/TextInput.vue";
-
-const router = useRouter();
-const role = ref("");
-const location = ref("");
-
-const searchForJobs = () => {
-  router.push({
-    name: "JobResults",
-    query: {
-      role: role.value,
-      location: location.value,
-    },
-  });
-};
-</script>

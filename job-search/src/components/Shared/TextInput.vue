@@ -7,7 +7,7 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   modelValue: {
     type: String,
@@ -16,5 +16,8 @@ defineProps({
 });
 
 const emit = defineEmits(["update:modelValue"]);
-const handleInput = ($event) => emit("update:modelValue", $event.target.value);
+const handleInput = ($event: Event) => {
+  const target = $event.target as HTMLInputElement;
+  emit("update:modelValue", target.value);
+};
 </script>
