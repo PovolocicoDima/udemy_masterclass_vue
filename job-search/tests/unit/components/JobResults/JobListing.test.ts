@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/vue";
 import { RouterLinkStub } from "@vue/test-utils";
 import JobListing from "@/components/JobResults/JobListing.vue";
-import { createJob } from "../../utils/createJob";
+import { createJob } from "../../../../src/utils/createJob";
 import type { Job } from "@/api/types";
 
 describe("JobListing", () => {

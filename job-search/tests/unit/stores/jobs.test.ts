@@ -3,7 +3,7 @@ import axios from "axios";
 import type { Mock } from "vitest";
 import { useJobsStore } from "@/stores/jobs";
 import { useUserStore } from "@/stores/user";
-import { createJob } from "../utils/createJob";
+import { createJob } from "../../../src/utils/createJob";
 
 vi.mock("axios");
 const axiosGetMock = axios.get as Mock;
