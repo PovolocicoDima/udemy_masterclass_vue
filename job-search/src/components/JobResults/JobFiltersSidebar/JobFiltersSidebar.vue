@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useJobsStore } from "@/stores/jobs";
-import { useUserStore } from "@/stores/user";
-
-import ActionButton from "@/components/Shared/ActionButton.vue";
-import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup.vue";
-
-const jobsStore = useJobsStore();
-const userStore = useUserStore();
-const UNIQ_ORGANIZATIONS = computed(() => jobsStore.UNIQ_ORGANIZATIONS);
-const UNIQUE_JOB_TYPES = computed(() => jobsStore.UNIQUE_JOB_TYPES);
+import JobFiltersSidebarDegrees from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarDegrees.vue";
+import JobFiltersSidebarJobTypes from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarJobTypes.vue";
+import JobFiltersSidebarOrganizations from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarOrganizations.vue";
+import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
+import JobFiltersSidebarPrompt from "@/components/JobResults/JobFiltersSidebar//JobFiltersSidebarPrompt.vue";
 </script>
 
 <template>
@@ -17,22 +11,19 @@ const UNIQUE_JOB_TYPES = computed(() => jobsStore.UNIQUE_JOB_TYPES);
     class="flex w-96 flex-col border-r border-solid border-brand-gray-1 bg-white p-4"
   >
     <section class="pb-5">
-      <div class="flex flex-row justify-between">
-        <h3 class="my-4 text-base font-semibold">What do you want to do?</h3>
-        <div class="flex items-center text-sm">
-          <action-button text="Clear Filters" type="secondary" />
-        </div>
-      </div>
-      <job-filters-sidebar-checkbox-group
-        header="Job Types"
-        :uniq-values="UNIQUE_JOB_TYPES"
-        :action="userStore.ADD_SELECTED_JOB_TYPES"
-      />
-      <job-filters-sidebar-checkbox-group
-        header="Organizations"
-        :uniq-values="UNIQ_ORGANIZATIONS"
-        :action="userStore.ADD_SELECTED_ORGANIZATIONS"
-      />
+      <job-filters-sidebar-prompt />
+
+      <collapsible-accordion header="Degrees">
+        <job-filters-sidebar-degrees />
+      </collapsible-accordion>
+
+      <collapsible-accordion header="Job Types">
+        <job-filters-sidebar-job-types />
+      </collapsible-accordion>
+
+      <collapsible-accordion header="Organizations">
+        <job-filters-sidebar-organizations />
+      </collapsible-accordion>
     </section>
   </div>
 </template>

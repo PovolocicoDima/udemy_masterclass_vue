@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import { ref, computed } from "vue";
+defineProps({ header: { type: String, required: true } });
+
+const isOpen = ref(false);
+const caretIcon = computed(() =>
+  isOpen.value ? ["fas", "angle-up"] : ["fas", "angle-down"]
+);
+const open = () => (isOpen.value = !isOpen.value);
+</script>
+
 <template>
   <div class="border-b border-solid border-brand-gray-2 py-5">
     <div
@@ -17,14 +28,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, computed } from "vue";
-defineProps({ header: { type: String, required: true } });
-
-const isOpen = ref(false);
-const caretIcon = computed(() =>
-  isOpen.value ? ["fas", "angle-up"] : ["fas", "angle-down"]
-);
-const open = () => (isOpen.value = !isOpen.value);
-</script>

@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-
-import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
+import { useUserStore } from "@/stores/user";
 
 const router = useRouter();
 const selectedValues = ref<string[]>([]);
 
 const props = defineProps({
-  header: {
-    type: String,
-    required: true,
-  },
   uniqValues: {
-    type: Set<string>,
+    type: [Set<string>, Array<string>],
     required: true,
   },
   action: {
@@ -26,26 +21,33 @@ const selectValue = () => {
   props.action(selectedValues.value);
   router.push({ name: "JobResults" });
 };
+
+const userStore = useUserStore();
+userStore.$onAction(({ after, name }) => {
+  after(() => {
+    if (name === "CLEAR_USER_JOB_FILTERS_SELECTED") {
+      selectedValues.value = [];
+    }
+  });
+});
 </script>
 
 <template>
-  <collapsible-accordion :header="header">
-    <div class="mt-5">
-      <fieldset>
-        <ul class="flex flex-col flex-wrap">
-          <li v-for="value in uniqValues" :key="value" class="h-8">
-            <input
-              :id="value"
-              v-model="selectedValues"
-              :value="value"
-              type="checkbox"
-              class="mr-3"
-              @change="selectValue"
-            />
-            <label :for="value">{{ value }}</label>
-          </li>
-        </ul>
-      </fieldset>
-    </div>
-  </collapsible-accordion>
+  <div class="mt-5">
+    <fieldset>
+      <ul class="flex flex-col flex-wrap">
+        <li v-for="value in uniqValues" :key="value" class="h-8">
+          <input
+            :id="value"
+            v-model="selectedValues"
+            :value="value"
+            type="checkbox"
+            class="mr-3"
+            @change="selectValue"
+          />
+          <label :for="value">{{ value }}</label>
+        </li>
+      </ul>
+    </fieldset>
+  </div>
 </template>

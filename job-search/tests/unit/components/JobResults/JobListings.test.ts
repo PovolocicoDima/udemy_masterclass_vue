@@ -6,6 +6,7 @@ vi.mock("vue-router");
 import type { Mock } from "vitest";
 import JobListings from "@/components/JobResults/JobListings.vue";
 import { useJobsStore } from "@/stores/jobs";
+import { useDegreeStore } from "@/stores/degrees";
 
 const useRouteMock = useRoute as Mock;
 
@@ -13,6 +14,7 @@ describe("JobListings", () => {
   const renderJobListings = () => {
     const pinia = createTestingPinia();
     const jobsStore = useJobsStore();
+    const degreesStore = useDegreeStore();
     // @ts-expect-error; Getters readonly
     jobsStore.FILTERED_JOBS = Array(15).fill({});
 
@@ -25,13 +27,19 @@ describe("JobListings", () => {
       },
     });
 
-    return { jobsStore };
+    return { jobsStore, degreesStore };
   };
 
   it("fetches jobs", () => {
     useRouteMock.mockReturnValue({ query: {} });
     const { jobsStore } = renderJobListings();
     expect(jobsStore.FETCH_JOBS).toHaveBeenCalled();
+  });
+
+  it("fetches degrees", () => {
+    useRouteMock.mockReturnValue({ query: {} });
+    const { degreesStore } = renderJobListings();
+    expect(degreesStore.FETCH_DEGREES).toHaveBeenCalled();
   });
 
   it("displays maximum of 10 jobs", async () => {

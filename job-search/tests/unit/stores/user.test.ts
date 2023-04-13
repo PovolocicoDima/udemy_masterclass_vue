@@ -1,7 +1,6 @@
 import { createPinia, setActivePinia } from "pinia";
 
 import { useUserStore } from "@/stores/user";
-import { useDegreeStore } from "@/stores/degrees";
 
 describe("state", () => {
   beforeEach(() => {
@@ -34,10 +33,10 @@ describe("actions", () => {
     setActivePinia(createPinia());
   });
 
-  describe("loginUser", () => {
+  describe("LOGIN_USER", () => {
     it("logs the user in", () => {
       const store = useUserStore();
-      store.loginUser();
+      store.LOGIN_USER();
       expect(store.isLoggedIn).toBe(true);
     });
   });
@@ -55,6 +54,29 @@ describe("actions", () => {
       const store = useUserStore();
       store.ADD_SELECTED_JOB_TYPES(["full-time", "part-time"]);
       expect(store.selectedJobTypes).toEqual(["full-time", "part-time"]);
+    });
+  });
+
+  describe("ADD_SELECTED_DEGREES", () => {
+    it("updates degrees the user has chosen to filter jobs by", () => {
+      const store = useUserStore();
+      store.ADD_SELECTED_DEGREES(["Master's"]);
+      expect(store.selectedDegrees).toEqual(["Master's"]);
+    });
+  });
+
+  describe("CLEAR_USER_JOB_FILTERS_SELECTED", () => {
+    it("removes all job filters that user has chosen", () => {
+      const store = useUserStore();
+      store.selectedDegrees = ["Random Degree"];
+      store.selectedJobTypes = ["Random Job type"];
+      store.selectedOrganizations = ["Random Organization"];
+
+      store.CLEAR_USER_JOB_FILTERS_SELECTED();
+
+      expect(store.selectedDegrees).toEqual([]);
+      expect(store.selectedJobTypes).toEqual([]);
+      expect(store.selectedOrganizations).toEqual([]);
     });
   });
 });

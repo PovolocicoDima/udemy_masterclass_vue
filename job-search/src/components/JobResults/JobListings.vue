@@ -4,10 +4,12 @@ import { useRoute } from "vue-router";
 
 import JobListing from "@/components/JobResults/JobListing.vue";
 import { useJobsStore } from "@/stores/jobs";
+import { useDegreeStore } from "@/stores/degrees";
 import usePreviousAndNextPages from "@/composables/usePreviousAndNextPage";
 
 const jobsStore = useJobsStore();
-
+const degreesStore = useDegreeStore();
+onMounted(degreesStore.FETCH_DEGREES);
 onMounted(jobsStore.FETCH_JOBS);
 
 const route = useRoute();
