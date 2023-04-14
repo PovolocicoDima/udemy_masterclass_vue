@@ -26,6 +26,11 @@ describe("state", () => {
     const store = useUserStore();
     expect(store.selectedDegrees).toEqual([]);
   });
+
+  it("stores user's search term for skills and qualification", () => {
+    const store = useUserStore();
+    expect(store.skillsSearchTerm).toBe("");
+  });
 });
 
 describe("actions", () => {
@@ -71,12 +76,23 @@ describe("actions", () => {
       store.selectedDegrees = ["Random Degree"];
       store.selectedJobTypes = ["Random Job type"];
       store.selectedOrganizations = ["Random Organization"];
+      store.skillsSearchTerm = "vue developer";
 
       store.CLEAR_USER_JOB_FILTERS_SELECTED();
 
       expect(store.selectedDegrees).toEqual([]);
       expect(store.selectedJobTypes).toEqual([]);
       expect(store.selectedOrganizations).toEqual([]);
+      expect(store.skillsSearchTerm).toBe("");
+    });
+  });
+
+  describe("UPDATE_SKILLS_SEARCH_TERM", () => {
+    it("receives search term for skills the user has entered", () => {
+      const store = useUserStore();
+      store.skillsSearchTerm = "";
+      store.UPDATE_SKILLS_SEARCH_TERM("Vue");
+      expect(store.skillsSearchTerm).toBe("Vue");
     });
   });
 });

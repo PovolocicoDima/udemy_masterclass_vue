@@ -1,9 +1,3 @@
-<template>
-  <button :class="buttonClass">
-    {{ text }}
-  </button>
-</template>
-
 <script setup lang="ts">
 import { computed, toRefs } from "vue";
 const props = defineProps({
@@ -29,6 +23,12 @@ const buttonClass = computed(() => {
   };
 });
 </script>
+
+<template>
+  <button :class="buttonClass">
+    {{ text }}
+  </button>
+</template>
 
 <style scoped>
 button {

@@ -1,12 +1,3 @@
-<template>
-  <input
-    type="text"
-    :value="modelValue"
-    class="w-full text-lg font-normal focus:outline-none"
-    @input="handleInput"
-  />
-</template>
-
 <script setup lang="ts">
 defineProps({
   modelValue: {
@@ -21,3 +12,12 @@ const handleInput = ($event: Event) => {
   emit("update:modelValue", target.value);
 };
 </script>
+
+<template>
+  <input
+    type="text"
+    :value="modelValue"
+    class="w-full text-lg font-normal focus:outline-none"
+    @input="handleInput"
+  />
+</template>

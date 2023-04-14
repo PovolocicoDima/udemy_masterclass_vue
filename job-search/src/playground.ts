@@ -1,7 +1,1 @@
-import type { Job } from "@/api/types";
-
-const state1: Partial<Job> = {};
-
-const state2: Partial<Job> = {
-  organization: "Microsoft",
-};
+function getFormData( form ) { var data = form.serializeArray(), formData = {}; // add empty [ select, textarea ] values form.find( 'select' ).each( function() { var name = $( this ).attr( 'name' ), value = $( this ).val(); // when select is not a form widget if ( !name ) { return true; } if ( !value ) { value = name.slice( -2 ) == '[]' ? [] : null; data.push( { name: name, value: value } ); } } ); for( var i in data ) { var name = data[ i ].name; if ( name.slice( -2 ) != '[]' ) { formData[ name ] = data[ i ].value; continue; } var end = name.length - 2; name = name.slice( 0, end ); formData[ name ] = formData[ name ] ? formData[ name ] : []; formData[ name ][ formData[ name ].length ] = data[ i ].value; } return formData; }

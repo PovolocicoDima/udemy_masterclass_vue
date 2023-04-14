@@ -12,6 +12,7 @@ export const useUserStore = defineStore("user", () => {
   const selectedDegrees = ref<string[]>([]);
   const selectedJobTypes = ref<string[]>([]);
   const selectedOrganizations = ref<string[]>([]);
+  const skillsSearchTerm = ref("");
 
   const LOGIN_USER = () => {
     isLoggedIn.value = true;
@@ -29,6 +30,11 @@ export const useUserStore = defineStore("user", () => {
     selectedDegrees.value = [];
     selectedJobTypes.value = [];
     selectedOrganizations.value = [];
+    skillsSearchTerm.value = "";
+  };
+
+  const UPDATE_SKILLS_SEARCH_TERM = (term: string) => {
+    skillsSearchTerm.value = term;
   };
 
   return {
@@ -36,10 +42,12 @@ export const useUserStore = defineStore("user", () => {
     selectedDegrees,
     selectedJobTypes,
     selectedOrganizations,
+    skillsSearchTerm,
     LOGIN_USER,
     ADD_SELECTED_ORGANIZATIONS,
     ADD_SELECTED_JOB_TYPES,
     ADD_SELECTED_DEGREES,
     CLEAR_USER_JOB_FILTERS_SELECTED,
+    UPDATE_SKILLS_SEARCH_TERM,
   };
 });

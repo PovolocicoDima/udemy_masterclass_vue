@@ -1,9 +1,23 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { useUserStore } from "@/stores/user";
 import JobFiltersSidebarDegrees from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarDegrees.vue";
 import JobFiltersSidebarJobTypes from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarJobTypes.vue";
 import JobFiltersSidebarOrganizations from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarOrganizations.vue";
 import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
-import JobFiltersSidebarPrompt from "@/components/JobResults/JobFiltersSidebar//JobFiltersSidebarPrompt.vue";
+import JobFiltersSidebarPrompt from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarPrompt.vue";
+import JobFiltersSidebarSkills from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarSkills.vue";
+
+const userStore = useUserStore();
+const route = useRoute();
+
+const parseSkillsSearchForm = () => {
+  const role = (route.query.role as string) || "";
+  userStore.UPDATE_SKILLS_SEARCH_TERM(role);
+};
+
+onMounted(parseSkillsSearchForm);
 </script>
 
 <template>
@@ -12,6 +26,7 @@ import JobFiltersSidebarPrompt from "@/components/JobResults/JobFiltersSidebar//
   >
     <section class="pb-5">
       <job-filters-sidebar-prompt />
+      <job-filters-sidebar-skills />
 
       <collapsible-accordion header="Degrees">
         <job-filters-sidebar-degrees />
